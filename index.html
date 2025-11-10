@@ -1,39 +1,51 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Unlock the Heritage Protected Architecture Walk</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       font-family: 'Segoe UI', sans-serif;
       margin: 0;
-      padding: 0;
+      padding: 20px;
       background: #f0f4f8;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      height: 100vh;
+      justify-content: flex-start;
+      min-height: 100vh;
       text-align: center;
     }
 
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+
     h1 {
-      font-size: 2rem;
+      font-size: 1.8rem;
       color: #333;
       margin-bottom: 0.5rem;
     }
 
     h2 {
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       color: #666;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
     }
 
-    button, select {
-      padding: 1rem 2rem;
+    select, button {
+      width: 100%;
+      max-width: 300px;
+      padding: 1rem;
       font-size: 1rem;
-      margin: 10px;
+      margin: 10px 0;
       border-radius: 8px;
       border: none;
       cursor: pointer;
@@ -54,11 +66,24 @@
       color: #333;
       border: 1px solid #ccc;
     }
+
+    .audio-controls {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    audio {
+      width: 100%;
+      max-width: 300px;
+    }
   </style>
 </head>
 <body>
 
-  <img src="tour-welcome.png" alt="Welcome to the Tour" style="max-width: 100%; height: auto; border-radius: 12px; margin-bottom: 20px;">
+  <img src="tour-welcome.png" alt="Welcome to the Tour">
 
   <h1>Welcome to the Heritage Protected Architecture Walk</h1>
   <h2>Tap below to unlock today's experience</h2>
@@ -74,15 +99,18 @@
   <!-- Unlock Button -->
   <button onclick="unlockTour()">Unlock Tour</button>
 
-  <!-- Audio Element -->
-  <audio id="tourAudio" controls style="margin-top: 20px;"></audio>
+  <!-- Audio Controls -->
+  <div class="audio-controls">
+    <audio id="tourAudio"></audio>
+    <button onclick="playAudio()">▶ Start Audio</button>
+    <button onclick="pauseAudio()">⏸ Stop Audio</button>
+  </div>
 
   <script>
     function unlockTour() {
       const language = document.getElementById('languageSelector').value;
       const audio = document.getElementById('tourAudio');
 
-      // Map language codes to audio file names
       const audioFiles = {
         no: 'tour-no.mp3',
         en: 'tour-en.mp3',
@@ -91,7 +119,17 @@
       };
 
       audio.src = audioFiles[language];
+      audio.load(); // Prepares the audio
+    }
+
+    function playAudio() {
+      const audio = document.getElementById('tourAudio');
       audio.play();
+    }
+
+    function pauseAudio() {
+      const audio = document.getElementById('tourAudio');
+      audio.pause();
     }
   </script>
 </body>
