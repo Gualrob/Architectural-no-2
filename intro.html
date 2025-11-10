@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Introduction – Heritage Walk</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Arial Rounded MT Bold", "Arial Rounded MT", Arial, sans-serif;
+      background: #f9f9f9;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 12;
+      margin-bottom: 1.5rem;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .play-button {
+      background-color: #0078D4;
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: background-color 0.3s ease;
+    }
+
+    .play-button:hover {
+      background-color: #005a9e;
+    }
+
+    audio {
+      margin-top: 2rem;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .locked-message {
+      color: #c00;
+      font-size: 1.1rem;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <img src="stop1.png" alt="Stop 1" />
+  <h1>Stop 1:<br><br>Use a headset or ear pods<br><br>for best sound quality</h1>
+  <button class="play-button" onclick="playAudio()">▶️ Play Audio</button>
+  <audio id="audio">
+    <source src="intro.mp3" type="audio/mpeg" />
+    Your browser does not support the audio element.
+  </audio>
+
+  <div id="lockedMessage" class="locked-message" style="display: none;">
+    You need to unlock the tour first. Redirecting...
+  </div>
+
+  <script>
+    const today = new Date().toISOString().split('T')[0];
+    const unlocked = localStorage.getItem('tourUnlocked');
+
+    if (unlocked !== today) {
+      document.getElementById('lockedMessage').style.display = 'block';
+      setTimeout(() => {
+        window.location.href = "index.html";
+      }, 3000);
+    }
+
+    function playAudio() {
+      document.getElementById('audio').play();
+    }
+  </script>
+</body>
+</html>
+
+
+
+

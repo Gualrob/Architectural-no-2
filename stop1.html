@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Stop 1</title>
+  <script>
+    const today = new Date().toISOString().split('T')[0];
+    const unlocked = localStorage.getItem('tourUnlocked');
+    if (unlocked !== today) {
+      alert("Please unlock the tour first!");
+      window.location.href = "index.html";
+    }
+  </script>
+</head>
+<body>
+  <h1>Stop 1</h1>
+  <audio controls>
+    <source src="audio/stop1.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+</body>
+</html>

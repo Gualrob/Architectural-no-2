@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stop 4 – Heritage Walk</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Arial Rounded MT Bold", "Arial Rounded MT", Arial, sans-serif;
+      background: #f9f9f9;
+      color: #333;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 12px;
+      margin-bottom: 0.5rem;
+    }
+
+    .locked-message {
+      color: #c00;
+      font-size: 1.1rem;
+      margin: 0.5rem 0 1rem 0;
+      display: none;
+      justify-content: center;
+      width: 100%;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      text-align: left;
+    }
+
+    .play-button {
+      background-color: #0078D4;
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: background-color 0.3s ease;
+    }
+
+    .play-button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .play-button:hover:enabled {
+      background-color: #005a9e;
+    }
+
+    audio {
+      margin-top: 2rem;
+      width: 100%;
+      max-width: 400px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="stop4.png" alt="Stop 4" />
+    <div id="lockedMessage" class="locked-message">
+      This map must be unlocked in our shop at Storgata 23.
+    </div>
+    <h1>Stop 4:<br><br>Architectural Highlights<br><br>Keiser Wilhelms gate 40</h1>
+    <button id="playBtn" class="play-button" onclick="playAudio()">▶️ Play Audio</button>
+    <audio id="audio">
+      <source src="stop4.mp3" type="audio/mpeg" />
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+
+  <script>
+    const today = new Date().toISOString().split('T')[0];
+    const unlocked = localStorage.getItem('tourUnlocked');
+    const playBtn = document.getElementById('playBtn');
+    const lockedMessage = document.getElementById('lockedMessage');
+
+    if (unlocked === today) {
+      playBtn.disabled = false;
+      lockedMessage.style.display = 'none';
+    } else {
+      playBtn.disabled = true;
+      lockedMessage.style.display = 'flex';
+    }
+
+    function playAudio() {
+      if (!playBtn.disabled) {
+        document.getElementById('audio').play();
+      }
+    }
+  </script>
+</body>
+</html>
